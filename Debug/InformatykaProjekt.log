@@ -1,0 +1,65 @@
+﻿  Source.cpp
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(35,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(36,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(36,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(65,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(65,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(66,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(66,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(69,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(69,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(70,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(70,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(73,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(73,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(74,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(74,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  InformatykaProjekt.vcxproj -> C:\programy\c++\Projekty\InformatykaProjekt\Debug\InformatykaProjekt.exe
