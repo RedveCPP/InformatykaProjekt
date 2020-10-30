@@ -20,6 +20,7 @@ int main()
 		break;
 	default:
 		break;
+		//gergeer
 	}
 	sf::RenderWindow window(sf::VideoMode(800, 600), "sfml");
 	sf::Event event;

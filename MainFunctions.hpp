@@ -4,7 +4,7 @@
 struct Vec2
 {
 	int x, y;
-	Vec2(int _x=0, int _y=0)
+	Vec2(int _x = 0, int _y = 0)
 	{
 		x = _x;
 		y = _y;
@@ -14,14 +14,14 @@ struct Vec2
 class Shape
 {
 protected:
-	bool isEapty;
+	bool isEapty = true;
 public:
-	const bool &isEaptyRef = isEapty;
+	const bool& isEaptyRef = isEapty;
 	virtual void Draw(sf::RenderWindow& window) = 0;
 	virtual ~Shape() {}
 };
 
-class Circle : public Shape
+class Circle : public virtual Shape
 {
 private:
 	Vec2 _position;
@@ -41,7 +41,7 @@ public:
 };
 
 #include <array>
-class Triangle :public Shape
+class Triangle :public virtual Shape
 {
 private:
 	std::array<Vec2, 3> triangleVectors;
@@ -80,6 +80,27 @@ public:
 	}
 };
 
+class Rectangle :public virtual Shape
+{
+private:
+	Vec2 Corners[2];
+public:
+	Rectangle(Vec2 point1, Vec2 point2)
+	{
+		isEapty = false;
+		Corners[0] = point1;
+		Corners[1] = point2;
+	}
+	virtual void Draw(sf::RenderWindow& window)
+	{
+		sf::RectangleShape rectangle;
+		rectangle.setPosition(Corners[0].x, Corners[0].y);
+		rectangle.setSize(sf::Vector2f(Corners[1].x - Corners[0].x, Corners[1].y - Corners[0].y));
+		window.draw(rectangle);
+	}
+	~Rectangle() { isEapty = true; }
+};
+
 void PrintMenu()
 {
 	std::cout << "1. Add a new shape" << std::endl;
@@ -102,7 +123,7 @@ int GetFirstFreeShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 {
 	short int userDecision = 0;
-	std::cout << "Which shape do you want to add?" <<std::endl<<
+	std::cout << "Which shape do you want to add?" << std::endl <<
 		"1. Triangle" << std::endl <<
 		"2. Circle" << std::endl <<
 		"3. Rectangle" << std::endl;
@@ -125,11 +146,40 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 			std::cout << "There is no space for shape" << std::endl;
 		}
 	}
-		break;
+	break;
 	case 2:
-		break;
+	{
+		int freeShapeIndex = GetFirstFreeShape(arrayRef);
+		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
+		{
+			int x, y, radius;
+			std::cout << "Enter X, Y and radius. for ex 400 300 5" << std::endl;
+			std::cin >> x >> y >> radius;
+			arrayRef[freeShapeIndex] = std::make_unique<Circle>(Vec2(x, y), radius);
+		}
+		else
+		{
+			std::cout << "There is no space for shape" << std::endl;
+		}
+	}
+	break;
 	case 3:
-		break;
+	{
+		int freeShapeIndex = GetFirstFreeShape(arrayRef);
+		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
+		{
+			int x[2];
+			int y[2];
+			std::cout << "Enter 2 points (x,y) that will be corners. for ex 400 300 5 15" << std::endl;
+			std::cin >> x[0] >> y[0] >> x[1]>>y[1];
+			arrayRef[freeShapeIndex] = std::make_unique<Rectangle>(Vec2(x[0], y[0]), Vec2(x[1],y[1]));
+		}
+		else
+		{
+			std::cout << "There is no space for shape" << std::endl;
+		}
+	}
+	break;
 	default:
 		break;
 	}

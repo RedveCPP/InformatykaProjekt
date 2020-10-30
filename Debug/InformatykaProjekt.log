@@ -62,4 +62,5 @@ C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp
           [
               T=float
           ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(92,20): warning C4018: '<': signed/unsigned mismatch
   InformatykaProjekt.vcxproj -> C:\programy\c++\Projekty\InformatykaProjekt\Debug\InformatykaProjekt.exe
