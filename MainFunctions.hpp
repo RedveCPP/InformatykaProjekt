@@ -111,14 +111,14 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	{
 	case 1:
 	{
-		int freeShapeIndex = 15;// GetFirstFreeShape(arrayRef);
+		int freeShapeIndex = GetFirstFreeShape(arrayRef);
 		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
 		{
 			int x[3];
 			int y[3];
 			std::cout << "Enter 3 triangle corner vectors (X Y X Y X Y) for ex. 500 40 120 50 1 1" << std::endl;
 			std::cin >> x[0] >> y[0] >> x[1] >> y[1] >> x[2] >> y[2];
-			arrayRef[5] = std::make_unique<Triangle>(std::array<Vec2, 3>{Vec2(x[0], y[0]), Vec2(x[1], y[1]), Vec2(x[2], y[2])});
+			arrayRef[freeShapeIndex] = std::make_unique<Triangle>(std::array<Vec2, 3>{Vec2(x[0], y[0]), Vec2(x[1], y[1]), Vec2(x[2], y[2])});
 		}
 		else
 		{
