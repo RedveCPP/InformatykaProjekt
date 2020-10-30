@@ -1,118 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include "Shape.hpp"
+#include "Triangle.hpp"
+#include "Circle.hpp"
+#include "Rectangle.hpp"
 
-struct Vec2
+int GetFirstFreeField(Shape** arrayRef)
 {
-	int x, y;
-	Vec2(int _x = 0, int _y = 0)
+	for (int i = 0; i < 20; ++i)
 	{
-		x = _x;
-		y = _y;
-	}
-};
-
-class Shape
-{
-protected:
-	bool isEapty = true;
-public:
-	const bool& isEaptyRef = isEapty;
-	virtual void Draw(sf::RenderWindow& window) = 0;
-	virtual ~Shape() {}
-};
-
-class Circle : public virtual Shape
-{
-private:
-	Vec2 _position;
-	int _radius;
-public:
-	Circle(const Vec2& position, int radius) :_position{ position }, _radius{ radius }{isEapty = false; }
-	virtual void Draw(sf::RenderWindow& window)
-	{
-		if (!isEapty)
-		{
-			sf::CircleShape circle(_radius);
-			circle.setPosition(_position.x, _position.y);
-			window.draw(circle);
-		}
-	}
-	virtual ~Circle() { isEapty = true; }
-};
-
-#include <array>
-class Triangle :public virtual Shape
-{
-private:
-	std::array<Vec2, 3> triangleVectors;
-public:
-	Triangle(const std::array<Vec2, 3>& vecArray)
-	{
-		isEapty = false;
-		int i = 0;
-		for (auto& element : triangleVectors)
-		{
-			element = vecArray[i];
-			i++;
-		}
-	}
-	~Triangle() { isEapty = true; }
-	virtual void Draw(sf::RenderWindow& window)
-	{
-		if (!isEapty)
-		{
-			sf::Vertex Line1[]{
-				sf::Vertex(sf::Vector2f(triangleVectors[0].x,triangleVectors[0].y)),
-				sf::Vertex(sf::Vector2f(triangleVectors[1].x,triangleVectors[1].y)),
-			};
-			sf::Vertex Line2[]{
-				sf::Vertex(sf::Vector2f(triangleVectors[1].x,triangleVectors[1].y)),
-				sf::Vertex(sf::Vector2f(triangleVectors[2].x,triangleVectors[2].y)),
-			};
-			sf::Vertex Line3[]{
-				sf::Vertex(sf::Vector2f(triangleVectors[2].x,triangleVectors[2].y)),
-				sf::Vertex(sf::Vector2f(triangleVectors[0].x,triangleVectors[0].y)),
-			};
-			window.draw(Line1, 2, sf::Lines);
-			window.draw(Line2, 2, sf::Lines);
-			window.draw(Line3, 2, sf::Lines);
-		}
-	}
-};
-
-class Rectangle :public virtual Shape
-{
-private:
-	Vec2 Corners[2];
-public:
-	Rectangle(Vec2 point1, Vec2 point2)
-	{
-		isEapty = false;
-		Corners[0] = point1;
-		Corners[1] = point2;
-	}
-	virtual void Draw(sf::RenderWindow& window)
-	{
-		sf::RectangleShape rectangle;
-		rectangle.setPosition(Corners[0].x, Corners[0].y);
-		rectangle.setSize(sf::Vector2f(Corners[1].x - Corners[0].x, Corners[1].y - Corners[0].y));
-		window.draw(rectangle);
-	}
-	~Rectangle() { isEapty = true; }
-};
-
-void PrintMenu()
-{
-	std::cout << "1. Add a new shape" << std::endl;
-	std::cout << "2. Remove a shape" << std::endl;
-	std::cout << "3. Exit" << std::endl;
-}
-
-int GetFirstFreeShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
-{
-	for (int i = 0; i < arrayRef.size(); ++i)
-	{
-		if (arrayRef[i]->isEaptyRef)
+		if (arrayRef[i] == nullptr)
 		{
 			return i;
 		}
@@ -120,7 +18,8 @@ int GetFirstFreeShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	return -1;
 }
 
-void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
+
+void AddANewShape(Shape** arrayRef)
 {
 	short int userDecision = 0;
 	std::cout << "Which shape do you want to add?" << std::endl <<
@@ -132,14 +31,15 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	{
 	case 1:
 	{
-		int freeShapeIndex = GetFirstFreeShape(arrayRef);
+		int freeShapeIndex = GetFirstFreeField(arrayRef);
 		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
 		{
 			int x[3];
 			int y[3];
 			std::cout << "Enter 3 triangle corner vectors (X Y X Y X Y) for ex. 500 40 120 50 1 1" << std::endl;
 			std::cin >> x[0] >> y[0] >> x[1] >> y[1] >> x[2] >> y[2];
-			arrayRef[freeShapeIndex] = std::make_unique<Triangle>(std::array<Vec2, 3>{Vec2(x[0], y[0]), Vec2(x[1], y[1]), Vec2(x[2], y[2])});
+			arrayRef[freeShapeIndex] = new Triangle(std::array<Vec2, 3>{Vec2(x[0], y[0]), Vec2(x[1], y[1]), Vec2(x[2], y[2])}, freeShapeIndex);
+
 		}
 		else
 		{
@@ -149,13 +49,13 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	break;
 	case 2:
 	{
-		int freeShapeIndex = GetFirstFreeShape(arrayRef);
+		int freeShapeIndex = GetFirstFreeField(arrayRef);
 		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
 		{
 			int x, y, radius;
 			std::cout << "Enter X, Y and radius. for ex 400 300 5" << std::endl;
 			std::cin >> x >> y >> radius;
-			arrayRef[freeShapeIndex] = std::make_unique<Circle>(Vec2(x, y), radius);
+			arrayRef[freeShapeIndex] = new Circle(Vec2(x, y), radius, freeShapeIndex);
 		}
 		else
 		{
@@ -165,14 +65,14 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	break;
 	case 3:
 	{
-		int freeShapeIndex = GetFirstFreeShape(arrayRef);
+		int freeShapeIndex = GetFirstFreeField(arrayRef);
 		if (freeShapeIndex >= 0 && freeShapeIndex <= 19)
 		{
 			int x[2];
 			int y[2];
 			std::cout << "Enter 2 points (x,y) that will be corners. for ex 400 300 5 15" << std::endl;
-			std::cin >> x[0] >> y[0] >> x[1]>>y[1];
-			arrayRef[freeShapeIndex] = std::make_unique<Rectangle>(Vec2(x[0], y[0]), Vec2(x[1],y[1]));
+			std::cin >> x[0] >> y[0] >> x[1] >> y[1];
+			arrayRef[freeShapeIndex] = new Rectangle(Vec2(x[0], y[0]), Vec2(x[1], y[1]), freeShapeIndex);
 		}
 		else
 		{
@@ -183,4 +83,55 @@ void AddANewShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 	default:
 		break;
 	}
+	system("cls");
 }
+
+void DeleteAShape(Shape** arrayRef)
+{
+	short int index = 0;
+	std::cout << "Which shape do you want remove?" << std::endl;
+	std::cin >> index;
+	if (index >= 0 && index <= 19)
+	{
+		if (arrayRef[index])
+		{
+			delete arrayRef[index];
+			arrayRef[index] = nullptr;
+		}
+		else
+		{
+			std::cout << "its already eapty";
+		}
+	}
+	system("cls");
+}
+
+void FreeMemory(Shape** shapeArray)
+{
+	for (int i = 0; i < 20; ++i) { delete shapeArray[i]; }
+	delete[]shapeArray;
+}
+
+void MenuEvents(sf::Event& event, Shape** shapeArray)
+{
+	if (event.type == event.KeyPressed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { AddANewShape(shapeArray); }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { DeleteAShape(shapeArray); }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+		{
+			FreeMemory(shapeArray);
+			std::terminate();
+		}
+	}
+}
+
+//void setinstructions(sf::text& instructions, sf::font font)
+//{
+//	instructions.setfillcolor(sf::color::black);
+//	instructions.setfont(font);
+//	instructions.setcharactersize(25);
+//	instructions.setstring("press 1 to add a new shape\npress 2 to remove a shape\npress 3 to exit");
+//	instructions.setoutlinethickness(2);
+//	instructions.setoutlinecolor(sf::color::white);
+//}

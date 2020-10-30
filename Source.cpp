@@ -1,44 +1,43 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <iostream>
 #include "MainFunctions.hpp"
-#include <memory>
+
 int main()
 {
-	std::array<std::unique_ptr<Shape>, 20> shapeArray;
-	short int userDecision = 0;
-	PrintMenu();
-	std::cout << "What do you want? " << std::endl;
-	std::cin >> userDecision;
-	switch (userDecision)
-	{
-	case 1:
-		AddANewShape(shapeArray);
-		break;
-	case 2:
+	Shape* shapeArray[20]{ nullptr };
 
-		break;
-	case 3:
-		break;
-	default:
-		std::cout << "Use different option fool!" << std::endl;
-		break;
-	}
-	sf::RenderWindow window(sf::VideoMode(800, 600), "sfml");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "IT rocks");
 	sf::Event event;
+
+	// it just cant be separated to function with reference because no. fuck you sfml
+	sf::Text instructions;
+	sf::Font font;
+	if (!font.loadFromFile("Arial.ttf")) { throw("Couldn't load font"); }
+	instructions.setFillColor(sf::Color::Black);
+	instructions.setFont(font);
+	instructions.setCharacterSize(25);
+	instructions.setString("Press 1 to add a new shape\nPress 2 to remove a shape\nPress 3 to exit");
+	instructions.setOutlineThickness(2);
+	instructions.setOutlineColor(sf::Color::White);
+
+	const sf::Color backgroundColor(46, 46, 46);
 	while (window.isOpen())
 	{
+		window.clear(backgroundColor);
 		while (window.pollEvent(event))
 		{
-			if (event.type == event.Closed)
-			{
-				window.close();
-			}
+			if (event.type == event.Closed) { window.close(); }
+			MenuEvents(event, shapeArray);
 		}
-		for (auto& shape : shapeArray)
+
+		for (int i = 0; i < 20; ++i)
 		{
-			shape->Draw(window);
+			if (shapeArray[i]) { shapeArray[i]->Draw(window); }
 		}
+		window.draw(instructions);
 		window.display();
 	}
+	FreeMemory(shapeArray);
 	return 0;
 }
