@@ -106,23 +106,15 @@ void DeleteAShape(Shape** arrayRef)
 	system("cls");
 }
 
-void FreeMemory(Shape** shapeArray)
+void MenuEvents(sf::Event& event, Shape** shapeArray, sf::RenderWindow& window)
 {
-	for (int i = 0; i < 20; ++i) { delete shapeArray[i]; }
-	delete[]shapeArray;
-}
 
-void MenuEvents(sf::Event& event, Shape** shapeArray)
-{
+	if (event.type == event.Closed) { window.close(); }
 	if (event.type == event.KeyPressed)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { AddANewShape(shapeArray); }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { DeleteAShape(shapeArray); }
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-		{
-			FreeMemory(shapeArray);
-			std::terminate();
-		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { window.close(); }
 	}
 }
 

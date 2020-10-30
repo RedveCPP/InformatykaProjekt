@@ -15,8 +15,20 @@ public:
 
 void Circle::Draw(sf::RenderWindow& window)
 {
+	sf::Text number;
+	sf::Font font;
+	if (!font.loadFromFile("Arial.ttf")) { throw("Couldn't load font"); }
+	number.setFillColor(sf::Color::Red);
+	number.setFont(font);
+	number.setCharacterSize(25);
+	number.setString(std::to_string(shapeIndex));
+	number.setOutlineThickness(2);
+	number.setOutlineColor(sf::Color::Black);
+	number.setPosition(_position.x+_radius, _position.y+ _radius);
+	
 	sf::CircleShape circle(_radius);
 	circle.setFillColor(fillColor);
 	circle.setPosition(_position.x, _position.y);
 	window.draw(circle);
+	window.draw(number);
 }
