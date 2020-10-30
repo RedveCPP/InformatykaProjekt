@@ -16,7 +16,7 @@ class Shape
 protected:
 	bool isEapty;
 public:
-	bool isEaptyRef = false;
+	const bool &isEaptyRef = isEapty;
 	virtual void Draw(sf::RenderWindow& window) = 0;
 	virtual ~Shape() {}
 };
@@ -89,7 +89,13 @@ void PrintMenu()
 
 int GetFirstFreeShape(std::array<std::unique_ptr<Shape>, 20>& arrayRef)
 {
-	std::cout << arrayRef[1].get()->isEaptyRef;
+	for (int i = 0; i < arrayRef.size(); ++i)
+	{
+		if (arrayRef[i]->isEaptyRef)
+		{
+			return i;
+		}
+	}
 	return -1;
 }
 
