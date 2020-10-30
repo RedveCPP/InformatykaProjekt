@@ -15,12 +15,13 @@ int main()
 		AddANewShape(shapeArray);
 		break;
 	case 2:
+
 		break;
 	case 3:
 		break;
 	default:
+		std::cout << "Use different option fool!" << std::endl;
 		break;
-		//gergeer
 	}
 	sf::RenderWindow window(sf::VideoMode(800, 600), "sfml");
 	sf::Event event;

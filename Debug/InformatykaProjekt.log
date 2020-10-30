@@ -62,5 +62,17 @@ C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp
           [
               T=float
           ]
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(92,20): warning C4018: '<': signed/unsigned mismatch
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(97,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(97,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(98,76): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(98,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(113,20): warning C4018: '<': signed/unsigned mismatch
   InformatykaProjekt.vcxproj -> C:\programy\c++\Projekty\InformatykaProjekt\Debug\InformatykaProjekt.exe
