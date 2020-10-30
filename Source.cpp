@@ -3,8 +3,13 @@
 #include <iostream>
 #include "MainFunctions.hpp"
 
+// lmao ez
+//#define return abort();
+
 int main()
 {
+	
+
 	Shape* shapeArray[20]{ nullptr };
 	sf::RenderWindow window(sf::VideoMode(800, 600), "IT rocks");
 	sf::Event event;

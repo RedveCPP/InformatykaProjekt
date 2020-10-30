@@ -105,6 +105,34 @@ void DeleteAShape(Shape** arrayRef)
 	}
 	system("cls");
 }
+#include <SFML/Audio.hpp>
+#include <chrono>
+void EasterEgg(sf::RenderWindow& window,sf::Event & event)
+{
+	sf::Music music;
+	if (!music.openFromFile("music.ogg"))	// 31s
+	{
+		std::cerr << "Error with loading music file" << std::endl;
+		return;
+	}
+	music.setVolume(50);
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	music.play();
+	while(true)
+	{
+		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+		if (std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() >= 6500)
+		{
+			sf::Color recColor = sf::Color(255, 110, 110);
+			window.clear(recColor);
+		}
+		if (std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() >= 31||sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+		{
+			return;
+		}
+	}
+
+}
 
 void MenuEvents(sf::Event& event, Shape** shapeArray, sf::RenderWindow& window)
 {
@@ -115,15 +143,6 @@ void MenuEvents(sf::Event& event, Shape** shapeArray, sf::RenderWindow& window)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { AddANewShape(shapeArray); }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { DeleteAShape(shapeArray); }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { window.close(); }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) { EasterEgg(window,event); }
 	}
 }
-
-//void setinstructions(sf::text& instructions, sf::font font)
-//{
-//	instructions.setfillcolor(sf::color::black);
-//	instructions.setfont(font);
-//	instructions.setcharactersize(25);
-//	instructions.setstring("press 1 to add a new shape\npress 2 to remove a shape\npress 3 to exit");
-//	instructions.setoutlinethickness(2);
-//	instructions.setoutlinecolor(sf::color::white);
-//}
