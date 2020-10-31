@@ -21,6 +21,7 @@ int GetFirstFreeField(Shape** arrayRef)
 
 void AddANewShape(Shape** arrayRef)
 {
+	system("cls");
 	short int userDecision = 0;
 	std::cout << "Which shape do you want to add?" << std::endl <<
 		"1. Triangle" << std::endl <<
@@ -83,11 +84,11 @@ void AddANewShape(Shape** arrayRef)
 	default:
 		break;
 	}
-	system("cls");
 }
 
 void DeleteAShape(Shape** arrayRef)
 {
+	system("cls");
 	short int index = 0;
 	std::cout << "Which shape do you want remove?" << std::endl;
 	std::cin >> index;
@@ -103,46 +104,91 @@ void DeleteAShape(Shape** arrayRef)
 			std::cout << "its already eapty";
 		}
 	}
-	system("cls");
 }
+
 #include <SFML/Audio.hpp>
 #include <chrono>
-void EasterEgg(sf::RenderWindow& window,sf::Event & event)
+#include <random>
+#include <ctime>
+void EasterEgg(sf::RenderWindow& window, sf::Event& event)
 {
+	sf::Text instructions;
+	sf::Font font;
+	if (!font.loadFromFile("Arial.ttf")) { throw("Couldn't load font"); }
+	instructions.setFillColor(sf::Color::Black);
+	instructions.setFont(font);
+	instructions.setCharacterSize(25);
+	instructions.setString("Press N to break");
+	instructions.setOutlineThickness(2);
+	instructions.setOutlineColor(sf::Color::White);
+	instructions.setPosition(10, 10);
+
 	sf::Music music;
 	if (!music.openFromFile("music.ogg"))	// 31s
 	{
 		std::cerr << "Error with loading music file" << std::endl;
 		return;
 	}
-	music.setVolume(50);
+	system("cls");
+	music.setVolume(70);
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point end;
 	music.play();
-	while(true)
+	sf::Sprite graph;
+	sf::Texture graphText;
+	if (!graphText.loadFromFile("wykres.png"))
 	{
-		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	}
+	else
+	{
+		graph.setTexture(graphText);
+		graph.setPosition(100, 100);
+		graph.setScale(sf::Vector2f(1.3,1.3));
+	}
+	while (std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() <= 31)
+	{
+		end = std::chrono::steady_clock::now();
 		if (std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() >= 6500)
 		{
-			sf::Color recColor = sf::Color(255, 110, 110);
+			static int seed = 0;
+			seed++;
+			std::mt19937 engine;
+			std::uniform_int_distribution<int> distributor(-7, 7);
+			engine.seed(seed);
+			int x = distributor(engine);
+			int y = distributor(engine);
+			graph.setPosition(100 + x, 100 + y);
+			sf::Color recColor = sf::Color(255, 0,0);
 			window.clear(recColor);
+			window.draw(instructions);
+			window.draw(graph);
 		}
-		if (std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() >= 31||sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
 		{
-			return;
+			break;
 		}
+		while (window.pollEvent(event))
+		{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+				{
+					break;
+				}
+		};
+		
+		window.display();
 	}
 
 }
 
-void MenuEvents(sf::Event& event, Shape** shapeArray, sf::RenderWindow& window)
+void MenuEvents(sf::Event& event, Shape** shapeArray, sf::RenderWindow& window, sf::Text& text)
 {
-
 	if (event.type == event.Closed) { window.close(); }
 	if (event.type == event.KeyPressed)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { AddANewShape(shapeArray); }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { DeleteAShape(shapeArray); }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { window.close(); }
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) { EasterEgg(window,event); }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) { EasterEgg(window, event); }
 	}
+	text.setString("Press 1 to add a new shape\nPress 2 to remove a shape\nPress 3 to exit\nPress M to ?");
 }

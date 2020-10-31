@@ -59,15 +59,15 @@ C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Triangle.hpp(39,4
           [
               T=float
           ]
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Triangle.hpp(55,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Triangle.hpp(55,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(27,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(27,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Triangle.hpp(55,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Triangle.hpp(55,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(27,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(27,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(29,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(31,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Circle.hpp(31,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(51,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(51,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(51,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(51,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(55,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(55,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(56,75): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
@@ -80,4 +80,11 @@ C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\Rectangle.hpp(56,
           [
               T=float
           ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(146,38): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(160,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\programy\c++\Projekty\InformatykaProjekt\InformatykaProjekt\MainFunctions.hpp(160,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   InformatykaProjekt.vcxproj -> C:\programy\c++\Projekty\InformatykaProjekt\Debug\InformatykaProjekt.exe

@@ -24,7 +24,7 @@ void Circle::Draw(sf::RenderWindow& window)
 	number.setString(std::to_string(shapeIndex));
 	number.setOutlineThickness(2);
 	number.setOutlineColor(sf::Color::Black);
-	number.setPosition(_position.x+_radius, _position.y+ _radius);
+	number.setPosition(_position.x+_radius-12, _position.y+ _radius-12);
 	
 	sf::CircleShape circle(_radius);
 	circle.setFillColor(fillColor);

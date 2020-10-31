@@ -52,7 +52,7 @@ void Triangle::Draw(sf::RenderWindow& window)
 	number.setString(std::to_string(shapeIndex));
 	number.setOutlineThickness(2);
 	number.setOutlineColor(sf::Color::White);
-	number.setPosition(center.x, center.y);
+	number.setPosition(center.x-12, center.y-12);
 	window.draw(number);
 }
 

@@ -3,13 +3,11 @@
 #include <iostream>
 #include "MainFunctions.hpp"
 
-// lmao ez
+// lmao xD
 //#define return abort();
 
 int main()
 {
-	
-
 	Shape* shapeArray[20]{ nullptr };
 	sf::RenderWindow window(sf::VideoMode(800, 600), "IT rocks");
 	sf::Event event;
@@ -21,14 +19,15 @@ int main()
 	instructions.setFillColor(sf::Color::Black);
 	instructions.setFont(font);
 	instructions.setCharacterSize(25);
-	instructions.setString("Press 1 to add a new shape\nPress 2 to remove a shape\nPress 3 to exit");
+	instructions.setString("Press 1 to add a new shape\nPress 2 to remove a shape\nPress 3 to exit\nPress M to ?");
 	instructions.setOutlineThickness(2);
 	instructions.setOutlineColor(sf::Color::White);
-
+	instructions.setPosition(10, 10);
+	
 	while (window.isOpen())
 	{
 		window.clear(sf::Color(46,46,46));
-		while (window.pollEvent(event)) { MenuEvents(event, shapeArray, window); }
+		while (window.pollEvent(event)) { MenuEvents(event, shapeArray, window,instructions); }
 		for (int i = 0; i < 20; ++i) { if (shapeArray[i]) { shapeArray[i]->Draw(window); } }
 		window.draw(instructions);
 		window.display();

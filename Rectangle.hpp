@@ -48,7 +48,7 @@ void Rectangle::Draw(sf::RenderWindow& window)
 	number.setOutlineThickness(2);
 	number.setOutlineColor(sf::Color::Black);
 	Vec2 center = GetCenter(Corners[0],Corners[1]);
-	number.setPosition(center.x, center.y);
+	number.setPosition(center.x-12, center.y-12);
 	
 	sf::RectangleShape rectangle;
 	rectangle.setFillColor(fillColor);
